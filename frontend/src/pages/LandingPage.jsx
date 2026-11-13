@@ -203,59 +203,77 @@ function LandingMap({ theme }) {
 }
 
 function EvidencePanel() {
+  const [mobileOpen, setMobileOpen] = useState(false)
+
   return (
-    <div className="lp-evidence-panel">
-      <div className="lp-evidence-header">
+    <div className={`lp-evidence-panel ${mobileOpen ? 'is-mobile-open' : ''}`}>
+      <div
+        className="lp-evidence-header"
+        onClick={() => setMobileOpen(prev => !prev)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setMobileOpen(prev => !prev) }}
+      >
         <span className="lp-evidence-title">EVIDENCE AGREEMENT</span>
+        <button
+          type="button"
+          className="lp-evidence-mobile-toggle"
+          aria-label={mobileOpen ? "Collapse evidence agreement" : "Expand evidence agreement"}
+        >
+          <span className="lp-evidence-toggle-score">94%</span>
+          <ChevronRight size={13} className="lp-evidence-chevron" />
+        </button>
       </div>
 
-      <div className="lp-evidence-list">
-        <div className="lp-evidence-row">
-          <span className="lp-evidence-name"><Video size={13} /> CCTV Feed</span>
-          <span className="lp-evidence-status lp-evidence-status--strong">Strong</span>
+      <div className="lp-evidence-body">
+        <div className="lp-evidence-list">
+          <div className="lp-evidence-row">
+            <span className="lp-evidence-name"><Video size={13} /> CCTV Feed</span>
+            <span className="lp-evidence-status lp-evidence-status--strong">Strong</span>
+          </div>
+          <div className="lp-evidence-row">
+            <span className="lp-evidence-name"><Droplets size={13} /> River Level Sensor</span>
+            <span className="lp-evidence-status lp-evidence-status--strong">Strong</span>
+          </div>
+          <div className="lp-evidence-row">
+            <span className="lp-evidence-name"><CloudRain size={13} /> Rainfall Sensor</span>
+            <span className="lp-evidence-status lp-evidence-status--strong">Strong</span>
+          </div>
+          <div className="lp-evidence-row">
+            <span className="lp-evidence-name"><AlertTriangle size={13} /> Weather Data</span>
+            <span className="lp-evidence-status lp-evidence-status--moderate">Moderate</span>
+          </div>
+          <div className="lp-evidence-row">
+            <span className="lp-evidence-name"><Users size={13} /> Citizen Reports</span>
+            <span className="lp-evidence-status lp-evidence-status--moderate">Moderate</span>
+          </div>
+          <div className="lp-evidence-row">
+            <span className="lp-evidence-name"><MapPin size={13} /> Satellite Imagery</span>
+            <span className="lp-evidence-status lp-evidence-status--strong">Active</span>
+          </div>
         </div>
-        <div className="lp-evidence-row">
-          <span className="lp-evidence-name"><Droplets size={13} /> River Level Sensor</span>
-          <span className="lp-evidence-status lp-evidence-status--strong">Strong</span>
-        </div>
-        <div className="lp-evidence-row">
-          <span className="lp-evidence-name"><CloudRain size={13} /> Rainfall Sensor</span>
-          <span className="lp-evidence-status lp-evidence-status--strong">Strong</span>
-        </div>
-        <div className="lp-evidence-row">
-          <span className="lp-evidence-name"><AlertTriangle size={13} /> Weather Data</span>
-          <span className="lp-evidence-status lp-evidence-status--moderate">Moderate</span>
-        </div>
-        <div className="lp-evidence-row">
-          <span className="lp-evidence-name"><Users size={13} /> Citizen Reports</span>
-          <span className="lp-evidence-status lp-evidence-status--moderate">Moderate</span>
-        </div>
-        <div className="lp-evidence-row">
-          <span className="lp-evidence-name"><MapPin size={13} /> Satellite Imagery</span>
-          <span className="lp-evidence-status lp-evidence-status--strong">Active</span>
-        </div>
-      </div>
 
-      <div className="lp-evidence-divider" />
+        <div className="lp-evidence-divider" />
 
-      <div className="lp-evidence-score-section">
-        <div className="lp-evidence-score-label">AGREEMENT SCORE</div>
-        <div className="lp-evidence-score-val">94%</div>
-        <div className="lp-evidence-bar">
-          {[...Array(10)].map((_, i) => (
-            <div
-              key={i}
-              className={`lp-evidence-bar-segment ${i < 9 ? 'active' : ''}`}
-            />
-          ))}
+        <div className="lp-evidence-score-section">
+          <div className="lp-evidence-score-label">AGREEMENT SCORE</div>
+          <div className="lp-evidence-score-val">94%</div>
+          <div className="lp-evidence-bar">
+            {[...Array(10)].map((_, i) => (
+              <div
+                key={i}
+                className={`lp-evidence-bar-segment ${i < 9 ? 'active' : ''}`}
+              />
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="lp-evidence-footer">
-        <span className="lp-evidence-footer-lbl">LAST UPDATED</span>
-        <span className="lp-evidence-footer-time">
-          <span className="lp-live-pulse-dot" /> Today, 10:24 AM
-        </span>
+        <div className="lp-evidence-footer">
+          <span className="lp-evidence-footer-lbl">LAST UPDATED</span>
+          <span className="lp-evidence-footer-time">
+            <span className="lp-live-pulse-dot" /> Today, 10:24 AM
+          </span>
+        </div>
       </div>
     </div>
   )
